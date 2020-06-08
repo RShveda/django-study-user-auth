@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{%url "index" %}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+
+            {% if request.path == '/first_app/profile' %}
+              <li class="nav-item active">
+            {%else%}
+              <li class="nav-item">
+            {% endif %}
+              <a class="nav-link" href="{%url "first_app:profile" %}">Profile
+                </a>
+            </li>
+
+            {% if request.path == '/first_app/user_registration' %}
+              <li class="nav-item active">
+            {%else%}
+              <li class="nav-item">
+            {% endif %}
+              <a class="nav-link" href="{%url "first_app:registration" %}">Registration</a>
+            </li>
+
+
+            {% if request.user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link" href="{%url "first_app:logout" %}">Logout</a></li>
+            {% else %}
+              {% if request.path == '/first_app/login' %}
+                <li class="nav-item active">
+              {%else%}
+                <li class="nav-item">
+              {% endif %}
+                <a class="nav-link" href="{%url "first_app:login" %}">Login</a>
+              </li>
+            {% endif %}
+
+
+
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="container">
+
+
+      {%block body_block%}
+      {%endblock body_block%}
+
+    </div>
+
+  </body>
+</html>
